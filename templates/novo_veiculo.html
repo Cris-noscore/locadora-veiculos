@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>➕ Novo Veículo</h2>
+
+<form method="POST">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="marca" class="form-label">Marca</label>
+                <input type="text" class="form-control" id="marca" name="marca" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="modelo" class="form-label">Modelo</label>
+                <input type="text" class="form-control" id="modelo" name="modelo" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="ano" class="form-label">Ano</label>
+                <input type="number" class="form-control" id="ano" name="ano" min="1900" max="2025" required>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="placa" class="form-label">Placa</label>
+                <input type="text" class="form-control" id="placa" name="placa" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="preco_diaria" class="form-label">Preço da Diária (R$)</label>
+                <input type="number" step="0.01" class="form-control" id="preco_diaria" name="preco_diaria" required>
+            </div>
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Cadastrar Veículo</button>
+    <a href="{{ url_for('veiculos') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

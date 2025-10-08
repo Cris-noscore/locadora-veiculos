@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">🚗 Locadora de Veículos</h1>
+    <p class="lead">Sistema de gerenciamento de locação de automóveis</p>
+    <hr class="my-4">
+    <p>Gerencie veículos, clientes e locações de forma simples e eficiente.</p>
+    
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">📊 Veículos</h5>
+                    <p class="card-text">Cadastre e gerencie a frota de veículos</p>
+                    <a href="{{ url_for('veiculos') }}" class="btn btn-primary">Acessar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">👥 Clientes</h5>
+                    <p class="card-text">Gerencie o cadastro de clientes</p>
+                    <a href="{{ url_for('clientes') }}" class="btn btn-primary">Acessar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">📝 Locações</h5>
+                    <p class="card-text">Controle de locações e histórico</p>
+                    <a href="{{ url_for('locacoes') }}" class="btn btn-primary">Acessar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

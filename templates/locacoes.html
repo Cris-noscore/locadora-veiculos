@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📝 Locações</h2>
+    <a href="{{ url_for('nova_locacao') }}" class="btn btn-success">+ Nova Locação</a>
+</div>
+
+{% if locacoes %}
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Veículo</th>
+            <th>Cliente</th>
+            <th>Data Início</th>
+            <th>Data Fim</th>
+            <th>Valor Total</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for locacao in locacoes %}
+        <tr>
+            <td>{{ locacao.id }}</td>
+            <td>{{ locacao.marca }} {{ locacao.modelo }} ({{ locacao.placa }})</td>
+            <td>{{ locacao.cliente_nome }}</td>
+            <td>
+                {% if locacao.data_inicio %}
+                    {{ locacao.data_inicio.strftime('%d/%m/%Y') }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+            <td>
+                {% if locacao.data_fim %}
+                    {{ locacao.data_fim.strftime('%d/%m/%Y') }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+            <td>R$ {{ "%.2f"|format(locacao.valor_total) }}</td>
+            <td>
+                {% if locacao.status == 'ativa' %}
+                <span class="badge bg-success">Ativa</span>
+                {% elif locacao.status == 'finalizada' %}
+                <span class="badge bg-secondary">Finalizada</span>
+                {% elif locacao.status == 'cancelada' %}
+                <span class="badge bg-danger">Cancelada</span>
+                {% else %}
+                <span class="badge bg-warning">{{ locacao.status }}</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if locacao.status == 'ativa' %}
+                <a href="{{ url_for('finalizar_locacao', id=locacao.id) }}" class="btn btn-sm btn-success" onclick="return confirm('Finalizar esta locação?')">Finalizar</a>
+                <a href="{{ url_for('cancelar_locacao', id=locacao.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Cancelar esta locação?')">Cancelar</a>
+                {% else %}
+                <span class="text-muted">Nenhuma ação</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+    Nenhuma locação cadastrada. <a href="{{ url_for('nova_locacao') }}">Crie a primeira locação</a>.
+</div>
+{% endif %}
+{% endblock %}
